@@ -47,6 +47,12 @@ def main():
     title = f'Example using Tkinter {get_tkinter_version()} and python {get_python_version()}'
     root.title(title)
     center_window(root)
+
+    # place a label on the root window
+    message = tk.Label(root, text = 'Hello, World!')
+    message.pack()
+
+    # display the window until closed by the user
     root.mainloop()
 
 
