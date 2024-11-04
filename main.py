@@ -6,8 +6,12 @@ from tkinter import *
 # from ctypes import windll
 #
 
-def center_window(window, pct: float):
-    """Center the Tkinter window in the middle of the screen using scale factor."""
+def scale_and_center_window(window: tk.Tk, pct: float) -> None:
+    """
+    Scale and center the Tkinter window in the middle of the screen using the specified percentage.
+    :param window: The Tkinter window to size and center.
+    :param pct: Percentage of the available device width and height to use (between 0 and 1).
+    """
     window.update_idletasks()
 
     device_width = window.winfo_screenwidth()
@@ -18,6 +22,7 @@ def center_window(window, pct: float):
 
     x = (device_width - scaled_width) // 2
     y = (device_height - scaled_height) // 2
+
     window_geometry = f'{scaled_width}x{scaled_height}+{x}+{y}'
     print(f'{window_geometry=}')
     window.geometry(window_geometry)
@@ -42,10 +47,14 @@ def main():
     # windll.shcore.SetProcessDpiAwareness(1)
 
     root = tk.Tk()
+    print(f'{type(root)=}')
     title = f'Example using Tkinter {get_tkinter_version()} and python {get_python_version()}'
     root.title(title)
-    center_window(root, 72./100)
+    scale_and_center_window(root, 72. / 100)
     root.resizable(False, False)
+
+    # use a different icon instead of the default
+    root.iconbitmap('./assets/pygame.ico')
 
     # place a label on the root window
     message = tk.Label(root, text = 'Hello, World!')
