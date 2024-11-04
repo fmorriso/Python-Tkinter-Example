@@ -6,7 +6,7 @@ from tkinter import *
 #
 from settings import Settings
 
-settings = Settings(6.0 / 10)
+settings = Settings(6.4 / 10)
 
 
 def center_window(window):
