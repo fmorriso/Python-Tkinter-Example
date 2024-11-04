@@ -3,6 +3,7 @@ import sys
 #
 import tkinter as tk
 from tkinter import *
+# from ctypes import windll
 #
 from settings import Settings
 
@@ -12,20 +13,13 @@ settings = Settings(6.4 / 10)
 def center_window(window):
     """Center the Tkinter window in the middle of the screen using scale factor."""
     window.update_idletasks()
-    # print(f'{window.winfo_width()=}, {window.winfo_height()=}')
-    # print(f'{window.winfo_screenwidth()=}, {window.winfo_screenheight()=}')
-    width = settings.scaled_width
-    height = settings.scaled_height
 
-    screen_width = settings.device_width
-    screen_height = settings.device_height
-    print(f'{screen_width=}, {screen_height=}')
-
-    x = (screen_width - width) // 2
-    y = (screen_height - height) // 2
-    window_geometry = f'{width}x{height}+{x}+{y}'
-    print(f'{window_geometry=}')
+    x = (settings.device_width - settings.scaled_width) // 2
+    y = (settings.device_height - settings.scaled_height) // 2
+    window_geometry = f'{settings.scaled_width}x{settings.scaled_height}+{x}+{y}'
+    # print(f'{window_geometry=}')
     window.geometry(window_geometry)
+    window.resizable(False, False)
 
 
 def get_python_version() -> str:
@@ -42,6 +36,8 @@ def main():
 
     msg = f'Tkinter version: {get_tkinter_version()}'
     print(msg)
+
+    # windll.shcore.SetProcessDpiAwareness(1)
 
     root = tk.Tk()
     title = f'Example using Tkinter {get_tkinter_version()} and python {get_python_version()}'
