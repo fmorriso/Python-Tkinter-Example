@@ -2,8 +2,7 @@ import platform
 import sys
 #
 import tkinter as tk
-from tkinter import *
-# from ctypes import windll
+from tkinter import ttk
 #
 
 def scale_and_center_window(window: tk.Tk, pct: float = 0.75, multiple_of: int = 100) -> None:
@@ -59,8 +58,12 @@ def main():
     root.iconbitmap('./assets/pygame.ico')
 
     # place a label on the root window
-    message = tk.Label(root, text = 'Hello, World!')
-    message.pack()
+    tk.Label(root, text = 'Hello, World!').pack()
+
+    tk.Label(root, text = 'Classic Label').pack()
+    ttk.Label(root, text = 'Themed Label').pack()
+
+    root.mainloop()
 
     # display the window until closed by the user
     root.mainloop()
