@@ -57,11 +57,16 @@ def main():
     # use a different icon instead of the default
     root.iconbitmap('./assets/pygame.ico')
 
-    # place a label on the root window
-    tk.Label(root, text = 'Hello, World!').pack()
+    # scale font 
+    font_size = int(root.winfo_width * 0.2)
+    label_font = ('Courier New', font_size)
+    print(f'{label_font=}')
 
-    tk.Label(root, text = 'Classic Label').pack()
-    ttk.Label(root, text = 'Themed Label').pack()
+    # place a label on the root window
+    tk.Label(root, text = 'Hello, World!', font=label_font).pack()
+
+    tk.Label(root, text = 'Classic Label', font=label_font).pack()
+    ttk.Label(root, text = 'Themed Label', font=label_font).pack()
 
     root.mainloop()
 
