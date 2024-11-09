@@ -19,6 +19,7 @@ modifications for window scaling using PyAutoGUI.
 
 ## Change History
 
-| Date       | Description                          |
-|:-----------|:-------------------------------------|
-| 2024-11-04 | Initial creation                     |
+| Date       | Description                         |
+|:-----------|:------------------------------------|
+| 2024-11-04 | Initial creation                    |
+| 2024-11-09 | Begin removing PyAutoGUI dependency |

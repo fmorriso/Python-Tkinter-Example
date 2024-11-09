@@ -3,7 +3,22 @@ import sys
 #
 import tkinter as tk
 from tkinter import ttk
+
+from gui_scaling import GuiScaling
+
+
 #
+
+def center_window(window: tk.Tk, scaling: GuiScaling) -> str:
+    window.update_idletasks()
+    x = int((scaling.device_width - scaling.scaled_width)) // 2
+    y = int((scaling.device_height - scaling.scaled_height)) // 2
+
+    window_geometry = f'{scaling.scaled_width}x{scaling.scaled_height}+{x}+{y}'
+    # print(f'{window_geometry=}')
+    window.geometry(window_geometry)
+    return window_geometry
+
 
 def scale_and_center_window(window: tk.Tk, pct: float = 0.75, multiple_of: int = 100) -> None:
     """
@@ -51,14 +66,16 @@ def main():
     print(f'{type(root)=}')
     title = f'Example using Tkinter {get_tkinter_version()} and python {get_python_version()}'
     root.title(title)
-    scale_and_center_window(root, 4./5, multiple_of = 32)
+    # scale_and_center_window(root, 4./5, multiple_of = 32)
+    scaling = GuiScaling(pct=0.8, square=False, multiple_of = 32)
+    center_window(root, scaling)
     root.resizable(False, False)
 
     # use a different icon instead of the default
     root.iconbitmap('./assets/pygame.ico')
 
     # scale font 
-    font_size = int(root.winfo_width * 0.2)
+    font_size = int(scaling.scaled_width * 0.05)
     label_font = ('Courier New', font_size)
     print(f'{label_font=}')
 
