@@ -1,5 +1,4 @@
-from screeninfo import get_monitors
-
+import ctypes
 
 class GuiScaling:
     """A class that provides scaling information about the device the current program is running on."""
@@ -59,19 +58,11 @@ class GuiScaling:
         self.__square = square
         self.__multiple_of = multiple_of
 
-        # use ScreenInfo package to get device screen size information since Tkinter is unreliable
-        self.monitors = get_monitors()
-        self.primary_monitor = self.monitors[0]
-        for monitor in self.monitors:
-            if monitor.is_primary:
-                self.primary_monitor = monitor
-                break
-
-
-        self.__device_width = self.primary_monitor.width
-        self.__device_height = self.primary_monitor.height
-
-        # self.window.destroy()
+        # use ctypes and windll to get true width and height of primary monitor
+        user32 = ctypes.windll.user32
+        user32.SetProcessDPIAware()
+        self.__device_width = user32.GetSystemMetrics(0)
+        self.__device_height = user32.GetSystemMetrics(1)
 
         # round scaled width and height to multiple of 100 unless square needed in which case use height for both
         # since device height is usually the smaller of the two
