@@ -1,4 +1,4 @@
-import tkinter as tk
+from screeninfo import get_monitors
 
 
 class GuiScaling:
@@ -55,19 +55,23 @@ class GuiScaling:
         :param multiple_of: The multiple of value that the scaled width and height will be rounded too.
         :type multiple_of: int
         """
-        self.__window = tk.Tk()
-
         self.__screen_pct = float(pct)
         self.__square = square
         self.__multiple_of = multiple_of
 
-        self.__device_width = self.__window.winfo_screenwidth()
-        # self.__scaled_width = int(self.__device_width * pct / self.__multiple_of) * self.__multiple_of
+        # use ScreenInfo package to get device screen size information since Tkinter is unreliable
+        self.monitors = get_monitors()
+        self.primary_monitor = self.monitors[0]
+        for monitor in self.monitors:
+            if monitor.is_primary:
+                self.primary_monitor = monitor
+                break
 
-        self.__device_height = self.__window.winfo_screenheight()
-        # self.__scaled_height = int(self.__device_height * pct / self.__multiple_of) * self.__multiple_of
 
-        self.__window.destroy()
+        self.__device_width = self.primary_monitor.width
+        self.__device_height = self.primary_monitor.height
+
+        # self.window.destroy()
 
         # round scaled width and height to multiple of 100 unless square needed in which case use height for both
         # since device height is usually the smaller of the two
@@ -81,6 +85,7 @@ class GuiScaling:
         return (f'device width: {self.__device_width}, device height: {self.__device_height}'
                 f'\n\tscaled width: {self.__scaled_width}, '
                 f'scaled height{self.__scaled_height}')
+
 
     def __repr__(self) -> str:
         return (f'device width: {self.__device_width}, device height: {self.__device_height}'

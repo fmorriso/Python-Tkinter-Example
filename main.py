@@ -60,14 +60,13 @@ def main():
     msg = f'Tkinter version: {get_tkinter_version()}'
     print(msg)
 
-    # windll.shcore.SetProcessDpiAwareness(1)
-
     root = tk.Tk()
-    print(f'{type(root)=}')
+    # print(f'{type(root)=}')
     title = f'Example using Tkinter {get_tkinter_version()} and python {get_python_version()}'
     root.title(title)
-    # scale_and_center_window(root, 4./5, multiple_of = 32)
-    scaling = GuiScaling(pct=0.8, square=False, multiple_of = 32)
+
+    scaling = GuiScaling(pct=0.67, square=False, multiple_of = 32)
+    print(f'{scaling=}')
     center_window(root, scaling)
     root.resizable(False, False)
 
@@ -75,7 +74,7 @@ def main():
     root.iconbitmap('./assets/pygame.ico')
 
     # scale font 
-    font_size = int(scaling.scaled_width * 0.05)
+    font_size = int(scaling.scaled_width * 0.02)
     label_font = ('Courier New', font_size)
     print(f'{label_font=}')
 
