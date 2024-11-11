@@ -14,7 +14,6 @@ modifications for window scaling using PyAutoGUI.
 ## References
 
 * [Tkinter Tutorial](https://www.pythontutorial.net/tkinter/)
-* [PyAutoGUI Documentation](https://pyautogui.readthedocs.io/en/latest/)
 
 ## Change History
 
